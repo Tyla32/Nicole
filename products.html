@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const products = [
+  {
+    name: "Indomie Noodles",
+    quantity: 8,
+    price: 500,
+    discount: 0.15,
+    category: "Food",
+    minStockLevel: 10
+  },
+  {
+    name: "Inyange Juice",
+    quantity: 12,
+    price: 1400,
+    discount: 0.1,
+    category: "Beverage",
+    minStockLevel: 10
+  },
+  {
+    name: "Fanta Orange",
+    quantity: 0,
+    price: 600,
+    discount: 0.05,
+    category: "Beverage",
+    minStockLevel: 10
+  }
+];
+function getTotalValue(products) {
+  let total = 0;
+
+  for (let i = 0; i < products.length; i++) {
+    total += products[i].price * products[i].quantity;
+  }
+
+  return total;
+}
+function getStatus(product) {
+  if (product.quantity === 0) {
+    return "out of stock";
+  } else if (product.quantity < product.minStockLevel) {
+    return "low stock";
+  } else if (product.quantity <= 50) {
+    return "Healthy";
+  } else {
+    return "well stocked";
+  }
+}
+function getDiscountValue(product) {
+  return product.price * product.discount;
+}
+console.log("Total Inventory Value:", getTotalValue(products), "RWF");
+
+for (let i = 0; i < products.length; i++) {
+  const product = products[i];
+
+  console.log(`\nProduct: ${product.name}`);
+  console.log(`Status: ${getStatus(product)}`);
+  console.log(`Discount per unit: ${getDiscountValue(product)} RWF`);
+}
+    </script>
+</body>
+</html>

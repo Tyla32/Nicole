@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+</head>
+<body>
+<script>
+
+// Q6 
+const product1 = {
+  name: "Indomie Noodles",
+  category: "Food",
+  price: 500,
+  quantity: 8,
+  minStockLevel: 10,
+  discountRate: 0.15
+};
+
+console.log(`Product: ${product1.name} (${product1.category})`);
+console.log(`Price: ${product1.price} RWF | Quantity: ${product1.quantity} units`);
+
+
+//  Q7 
+const totalValue1 = product1.price * product1.quantity;
+const discount1 = product1.price * product1.discountRate;
+const discountedPrice1 = product1.price - discount1;
+
+console.log(`Total stock value: ${totalValue1} RWF`);
+console.log(`Discount per unit: ${discount1} RWF`);
+console.log(`Discounted price: ${discountedPrice1} RWF`);
+
+
+// Q8 
+if (product1.quantity === 0) {
+  console.log(`${product1.name}: OUT OF STOCK - Reorder immediately.`);
+} else if (product1.quantity < product1.minStockLevel) {
+  console.log(`${product1.name}: LOW STOCK - ${product1.quantity} units remaining.`);
+} else if (product1.quantity <= 50) {
+  console.log(`${product1.name}: Healthy stock - ${product1.quantity} units.`);
+} else {
+  console.log(`${product1.name}: Well stocked - ${product1.quantity} units.`);
+}
+
+
+// Q9 
+const product2 = {
+  name: "Inyange Juice",
+  category: "Beverage",
+  price: 1400,
+  quantity: 12,
+  minStockLevel: 10,
+  discountRate: 0.1
+};
+
+// Summary
+console.log(`Product: ${product2.name} (${product2.category})`);
+console.log(`Price: ${product2.price} RWF | Quantity: ${product2.quantity} units`);
+
+// Calculations
+const totalValue2 = product2.price * product2.quantity;
+const discount2 = product2.price * product2.discountRate;
+const discountedPrice2 = product2.price - discount2;
+
+console.log(`Total stock value: ${totalValue2} RWF`);
+console.log(`Discount per unit: ${discount2} RWF`);
+console.log(`Discounted price: ${discountedPrice2} RWF`);
+
+// Comparison
+console.log("---- PRICE COMPARISON ----");
+
+if (product1.price < product2.price) {
+  console.log(`Budget pick: ${product1.name}`);
+  console.log(`${product1.name} is ${Math.abs(product1.price - product2.price)} RWF cheaper than ${product2.name}.`);
+} else if (product2.price < product1.price) {
+  console.log(`Budget pick: ${product2.name}`);
+} else {
+  console.log("Both products are the same price.");
+}
+
+
+//  Q10 
+let alertTriggered = false;
+
+// Alert 1
+if (product1.quantity === 0 || product2.quantity === 0) {
+  console.log("URGENT: One or more products are out of stock!");
+  alertTriggered = true;
+}
+
+// Alert 2
+if (
+  product1.quantity < product1.minStockLevel &&
+  product2.quantity < product2.minStockLevel
+) {
+  console.log("RESTOCK ALERT: Both products are low!");
+  alertTriggered = true;
+}
+
+// Alert 3
+if (
+  (product1.price > 1500 && product1.quantity < product1.minStockLevel) ||
+  (product2.price > 1500 && product2.quantity < product2.minStockLevel)
+) {
+  console.log("PRIORITY ALERT: Premium product needs restock!");
+  alertTriggered = true;
+}
+
+// Alert 4
+if (!alertTriggered) {
+  console.log("Inventory status: all products OK.");
+}
+
+
+//  Q11 
+const totalProducts = 2;
+const totalInventoryValue = totalValue1 + totalValue2;
+
+// Most expensive
+let mostExpensiveName;
+let mostExpensivePrice;
+
+if (product1.price > product2.price) {
+  mostExpensiveName = product1.name;
+  mostExpensivePrice = product1.price;
+} else {
+  mostExpensiveName = product2.name;
+  mostExpensivePrice = product2.price;
+}
+
+// Low stock count
+let lowStockCount = 0;
+
+if (product1.quantity < product1.minStockLevel) {
+  lowStockCount++;
+}
+if (product2.quantity < product2.minStockLevel) {
+  lowStockCount++;
+}
+
+// Report
+
+console.log("=== KIGALI SHOP INVENTORY REPORT ===");
+console.log(`Total products: ${totalProducts}`);
+console.log(`Total inventory value: ${totalInventoryValue} RWF`);
+console.log(`Most expensive item: ${mostExpensiveName} (${mostExpensivePrice} RWF)`);
+console.log(`Products needing restock: ${lowStockCount}`);
+
+
+console.log("Insight: Indomie Noodles is below minimum stock. Restock before the next market day.");
+
+
+
+</script>
+</body>
+</html>

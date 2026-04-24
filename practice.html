@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// Q1 — ARRAY OPERATIONS
+const shop = [
+  { name: "Indomie", price: 500, quantity: 20 },
+  { name: "Akabanga", price: 2500, quantity: 6 },
+  { name: "Fanta", price: 600, quantity: 0 },
+];
+
+// Print first product name
+console.log(shop[0].name);
+
+// Print last product price
+console.log(shop[shop.length - 1].price);
+
+// Update second product quantity
+shop[1].quantity = 100;
+
+// Check length before push
+console.log(shop.length);
+
+// Add new product
+shop.push({ name: "Water", price: 300, quantity: 50 });
+
+// Check length after push
+console.log(shop.length);
+
+// Print updated product
+console.log(shop[1]);
+// Q2 — FUNCTIONS
+// Function: describe product
+function describeProduct(product) {
+  return `${product.name} — ${product.price} RWF, ${product.quantity} units`;
+}
+
+// Function: check affordability
+function isAffordable(product, budget) {
+  return product.price <= budget; // returns true or false
+}
+
+// Call functions
+console.log(describeProduct(shop[0]));
+console.log(describeProduct(shop[1]));
+console.log(describeProduct(shop[2]));
+
+console.log(isAffordable(shop[0], 1000)); // true
+console.log(isAffordable(shop[1], 1000)); // false
+console.log(isAffordable(shop[2], 600));  // true
+// Q3 — forEach ACCUMULATION
+const sales = [
+  { product: "Indomie", unitsSold: 45, pricePerUnit: 500 },
+  { product: "Akabanga", unitsSold: 12, pricePerUnit: 2500 },
+  { product: "Fanta", unitsSold: 80, pricePerUnit: 600 },
+  { product: "Inyange", unitsSold: 0, pricePerUnit: 300 },
+];
+
+let totalRevenue = 0;
+let zeroSales = 0;
+let topSeller = sales[0];
+
+sales.forEach(function(item) {
+  const revenue = item.unitsSold * item.pricePerUnit;
+
+  console.log(`${item.product}: ${revenue} RWF`);
+
+  totalRevenue += revenue;
+
+  if (item.unitsSold === 0) {
+    zeroSales++;
+  }
+
+  // compare revenue to find top seller
+  if (revenue > (topSeller.unitsSold * topSeller.pricePerUnit)) {
+    topSeller = item;
+  }
+});
+
+console.log(`Total revenue: ${totalRevenue} RWF`);
+console.log(`Products with zero sales: ${zeroSales}`);
+console.log(`Top seller: ${topSeller.product}`);
+// Q4 — FUNCTIONS + forEach
+// Function: calculate revenue
+function getRevenue(sale) {
+  return sale.unitsSold * sale.pricePerUnit;
+}
+
+// Function: sales status
+function getSalesStatus(sale) {
+  if (sale.unitsSold === 0) return "No sales";
+  if (sale.unitsSold < 20) return "Low";
+  if (sale.unitsSold < 60) return "Good";
+  return "Excellent";
+}
+
+let totalRev = 0;
+let excellentCount = 0;
+
+sales.forEach(function(sale) {
+  console.log(
+    `${sale.product} — ${getRevenue(sale)} RWF — ${getSalesStatus(sale)}`
+  );
+});
+
+sales.forEach(function(sale) {
+  totalRev += getRevenue(sale);
+
+  if (getSalesStatus(sale) === "Excellent") {
+    excellentCount++;
+  }
+});
+
+console.log(`Total revenue: ${totalRev} RWF`);
+console.log(`Excellent performers: ${excellentCount}`);
+    </script>
+</body>
+</html>

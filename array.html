@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><script>
+    const products = [
+  { name: "Indomie Noodles", price: 500, quantity: 10 },
+  { name: "Inyange Juice", price: 1400, quantity: 5 },
+  { name: "Fanta Orange", price: 600, quantity: 8 },
+  { name: "Akabanga", price: 2500, quantity: 2 }
+];
+ 
+const totalValue =
+  products[0].price * products[0].quantity +
+  products[1].price * products[1].quantity +
+  products[2].price * products[2].quantity +
+  products[3].price * products[3].quantity;
+
+console.log(`Total value (4 products): ${totalValue} RWF`);
+products.push({ name: "Inyange Water", price: 300, quantity: 20 });
+
+const newTotalValue =
+  products[0].price * products[0].quantity +
+  products[1].price * products[1].quantity +
+  products[2].price * products[2].quantity +
+  products[3].price * products[3].quantity +
+  products[4].price * products[4].quantity;
+
+console.log(`Total value (5 products): ${newTotalValue} RWF`);
+</script>
+</body>
+</html>
+
+<!-- declare  an array with products
+(name, quantity, price, discount, category, minStockLevel)
+build the following functions:
+-getTotalValue
+-getStatus: if quantity is equal to 0 print 'out of stock'
+            if the quantity is less than minStockLevel print 'low stock'
+            if quantity is less than or equal 50 print 'Healthy'
+            if quantity is greater than 50 print 'well stocked'
+-getDiscountValue -->

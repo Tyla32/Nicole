@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// PRODUCTS ARRAY
+const products = [
+  { name: "Indomie", category: "Food", price: 500, quantity: 20, minStockLevel: 10 },
+  { name: "Akabanga", category: "Condiments", price: 2500, quantity: 4, minStockLevel: 10 },
+  { name: "Inyange Water", category: "Beverages", price: 300, quantity: 0, minStockLevel: 5 },
+  { name: "Fanta Orange", category: "Beverages", price: 600, quantity: 70, minStockLevel: 20 },
+  { name: "Rwandan Tea", category: "Food", price: 1100, quantity: 60, minStockLevel: 20 }
+];
+// FUNCTIONS
+function getTotalValue(product) {
+  return product.price * product.quantity;
+}
+
+function getDiscountedPrice(product) {
+  return product.price * 0.85;
+}
+
+function getStatus(product) {
+  if (product.quantity === 0) return "OUT OF STOCK";
+  if (product.quantity < product.minStockLevel) return "LOW STOCK";
+  if (product.quantity <= 50) return "Healthy";
+  return "Well stocked";
+}
+// PRINT PRODUCTS
+products.forEach(function(product) {
+  console.log(
+    `${product.name} (${product.category}) — ${getStatus(product)} — ${getTotalValue(product)} RWF — disc: ${getDiscountedPrice(product)} RWF`
+  );
+});
+// ACCUMULATION
+let totalValue = 0;
+let lowStock = 0;
+
+products.forEach(function(product) {
+  totalValue += getTotalValue(product);
+
+  if (product.quantity < product.minStockLevel) {
+    lowStock++;
+  }
+});
+// MOST & CHEAPEST
+let mostExpensive = products[0];
+let cheapest = products[0];
+
+products.forEach(function(product) {
+  if (product.price > mostExpensive.price) {
+    mostExpensive = product;
+  }
+
+  if (product.price < cheapest.price) {
+    cheapest = product;
+  }
+});
+console.log("=".repeat(37));
+console.log("KIGALI SHOP INVENTORY REPORT");
+console.log("=".repeat(37));
+
+console.log(`Total products: ${products.length}`);
+console.log(`Total inventory value: ${totalValue} RWF`);
+console.log(`Products needing restock: ${lowStock}`);
+console.log(`Most expensive: ${mostExpensive.name}`);
+console.log(`Cheapest: ${cheapest.name}`);
+
+console.log("=".repeat(37));
+// PREVIEW ANSWERS:
+// .filter() loops through an array and keeps only items where the condition is true.
+// If the function returns true → the item is included.
+// If false → the item is skipped.
+    </script>
+</body>
+</html>
